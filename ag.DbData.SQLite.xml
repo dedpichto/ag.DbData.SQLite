@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ag.DbData.SQLite</name>
+    </assembly>
+    <members>
+        <member name="T:ag.DbData.SQLite.Extensions.Extensions">
+            <summary>
+            Represents <see cref="N:ag.DbData.SQLite"/> extensions.
+            </summary>
+        </member>
+        <member name="M:ag.DbData.SQLite.Extensions.Extensions.AddAgSQLite(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Appends the registration of <see cref="T:ag.DbData.SQLite.Factories.SQLiteDbDataFactory"/> and <see cref="T:ag.DbData.SQLite.SQLiteDbDataObject"/> services to <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.
+            </summary>
+            <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> to add the services to.</param>
+            <returns><see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.</returns>
+        </member>
+        <member name="M:ag.DbData.SQLite.Extensions.Extensions.AddAgSQLite(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfigurationSection)">
+            <summary>
+            Appends the registration of <see cref="T:ag.DbData.SQLite.Factories.SQLiteDbDataFactory"/> and <see cref="T:ag.DbData.SQLite.SQLiteDbDataObject"/> services to <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> and registers a configuration instance.
+            </summary>
+            <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> to add the services to.</param>
+            <param name="configurationSection">The <see cref="T:Microsoft.Extensions.Configuration.IConfigurationSection"/> being bound.</param>
+            <returns><see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.</returns>
+        </member>
+        <member name="M:ag.DbData.SQLite.Extensions.Extensions.AddAgSQLite(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{ag.DbData.Abstraction.DbDataSettings})">
+            <summary>
+            Appends the registration of <see cref="T:ag.DbData.SQLite.Factories.SQLiteDbDataFactory"/> and <see cref="T:ag.DbData.SQLite.SQLiteDbDataObject"/> services to <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> and configures the options.
+            </summary>
+            <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> to add the services to.</param>
+            <param name="configureOptions">The action used to configure the options.</param>
+            <returns><see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.</returns>
+        </member>
+        <member name="T:ag.DbData.SQLite.Factories.ISQLiteDbDataFactory">
+            <inheritdoc />
+        </member>
+        <member name="T:ag.DbData.SQLite.Factories.SQLiteDbDataFactory">
+            <summary>
+            Represents SqlDbDataFactory object.
+            </summary>
+        </member>
+        <member name="M:ag.DbData.SQLite.Factories.SQLiteDbDataFactory.Create(System.String)">
+            <summary>
+            Creates object of type <see cref="T:ag.DbData.SQLite.SQLiteDbDataObject"/>.
+            </summary>
+            <param name="connectionString">Database connection string.</param>
+            <returns><see cref="T:ag.DbData.SQLite.SQLiteDbDataObject"/> implementation of <see cref="T:ag.DbData.Abstraction.IDbDataObject"/> interface.</returns>
+        </member>
+        <member name="M:ag.DbData.SQLite.Factories.SQLiteDbDataFactory.#ctor(System.IServiceProvider)">
+            <summary>
+            Creates new SQLiteDbDataFactory object.
+            </summary>
+            <param name="serviceProvider"><see cref="T:System.IServiceProvider"/></param>
+        </member>
+        <member name="T:ag.DbData.SQLite.SQLiteDbDataObject">
+            <summary>
+            Represents SQLiteDbDataObject object.
+            </summary>
+        </member>
+        <member name="M:ag.DbData.SQLite.SQLiteDbDataObject.#ctor(Microsoft.Extensions.Logging.ILogger{ag.DbData.Abstraction.IDbDataObject},Microsoft.Extensions.Options.IOptions{ag.DbData.Abstraction.DbDataSettings})">
+            <summary>.
+            Creates new instance of <see cref="T:ag.DbData.SQLite.SQLiteDbDataObject"/>.
+            </summary>
+            <param name="logger"><see cref="T:Microsoft.Extensions.Logging.ILogger"/> object.</param>
+            <param name="options"><see cref="T:ag.DbData.Abstraction.DbDataSettings"/> options.</param>
+        </member>
+        <member name="M:ag.DbData.SQLite.SQLiteDbDataObject.FillDataSet(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.SQLite.SQLiteDbDataObject.FillDataSet(System.String,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.SQLite.SQLiteDbDataObject.FillDataSet(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.SQLite.SQLiteDbDataObject.FillDataSet(System.String,System.Collections.Generic.IEnumerable{System.String},System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.SQLite.SQLiteDbDataObject.FillDataSetInTransaction(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.SQLite.SQLiteDbDataObject.FillDataSetInTransaction(System.String,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.SQLite.SQLiteDbDataObject.FillDataSetInTransaction(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.SQLite.SQLiteDbDataObject.FillDataSetInTransaction(System.String,System.Collections.Generic.IEnumerable{System.String},System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.SQLite.SQLiteDbDataObject.FillDataTable(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.SQLite.SQLiteDbDataObject.FillDataTable(System.String,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.SQLite.SQLiteDbDataObject.FillDataTableInTransaction(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.SQLite.SQLiteDbDataObject.FillDataTableInTransaction(System.String,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.SQLite.SQLiteDbDataObject.ExecuteCommand(System.Data.Common.DbCommand)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.SQLite.SQLiteDbDataObject.ExecuteCommand(System.Data.Common.DbCommand,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.SQLite.SQLiteDbDataObject.ExecuteCommandInTransaction(System.Data.Common.DbCommand)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.SQLite.SQLiteDbDataObject.ExecuteCommandInTransaction(System.Data.Common.DbCommand,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.SQLite.SQLiteDbDataObject.BeginTransaction(System.String)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>
