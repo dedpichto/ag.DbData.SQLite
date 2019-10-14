@@ -1,5 +1,7 @@
 ﻿using ag.DbData.Abstraction;
+using ag.DbData.Abstraction.Services;
 using ag.DbData.SQLite.Factories;
+using ag.DbData.SQLite.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -18,6 +20,8 @@ namespace ag.DbData.SQLite.Extensions
         /// <returns><see cref="IServiceCollection"/>.</returns>
         public static IServiceCollection AddAgSQLite(this IServiceCollection services)
         {
+            services.AddSingleton<SQLiteStringProvider>();
+            services.AddSingleton<IDbDataStringProviderFactory<SQLiteStringProvider>, SQLiteStringProviderFactory>();
             services.AddSingleton<ISQLiteDbDataFactory, SQLiteDbDataFactory>();
             services.AddTransient<SQLiteDbDataObject>();
             return services;
@@ -31,8 +35,7 @@ namespace ag.DbData.SQLite.Extensions
         /// <returns><see cref="IServiceCollection"/>.</returns>
         public static IServiceCollection AddAgSQLite(this IServiceCollection services, IConfigurationSection configurationSection)
         {
-            services.AddSingleton<ISQLiteDbDataFactory, SQLiteDbDataFactory>();
-            services.AddTransient<SQLiteDbDataObject>();
+            services.AddAgSQLite();
             services.Configure<DbDataSettings>(configurationSection);
             return services;
         }
@@ -46,8 +49,7 @@ namespace ag.DbData.SQLite.Extensions
         public static IServiceCollection AddAgSQLite(this IServiceCollection services,
             Action<DbDataSettings> configureOptions)
         {
-            services.AddSingleton<ISQLiteDbDataFactory, SQLiteDbDataFactory>();
-            services.AddTransient<SQLiteDbDataObject>();
+            services.AddAgSQLite();
             services.Configure(configureOptions);
             return services;
         }

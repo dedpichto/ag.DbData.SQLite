@@ -1,7 +1,7 @@
-﻿using System;
-using System.Data.SQLite;
-using ag.DbData.Abstraction;
+﻿using ag.DbData.Abstraction;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Data.SQLite;
 
 namespace ag.DbData.SQLite.Factories
 {

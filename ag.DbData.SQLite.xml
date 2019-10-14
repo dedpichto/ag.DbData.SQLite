@@ -53,17 +53,40 @@
             </summary>
             <param name="serviceProvider"><see cref="T:System.IServiceProvider"/></param>
         </member>
+        <member name="T:ag.DbData.SQLite.Services.SQLiteStringProvider">
+            <summary>
+            Represents concrete class inherited from <see cref="T:ag.DbData.Abstraction.Services.DbDataStringProvider"/>.
+            </summary>
+        </member>
+        <member name="T:ag.DbData.SQLite.Services.SQLiteStringProviderFactory">
+            <summary>
+            Represents <see cref="T:ag.DbData.SQLite.Services.SQLiteStringProviderFactory"/> object.
+            </summary>
+        </member>
+        <member name="M:ag.DbData.SQLite.Services.SQLiteStringProviderFactory.#ctor(System.IServiceProvider)">
+            <summary>
+            Creates new instance of <see cref="T:ag.DbData.SQLite.Services.SQLiteStringProviderFactory"/>.
+            </summary>
+            <param name="serviceProvider"><see cref="T:System.IServiceProvider"/>.</param>
+        </member>
+        <member name="M:ag.DbData.SQLite.Services.SQLiteStringProviderFactory.Get">
+            <summary>
+            Creates object of type <see cref="T:ag.DbData.SQLite.Services.SQLiteStringProvider"/>.
+            </summary>
+            <returns>Object of type <see cref="T:ag.DbData.SQLite.Services.SQLiteStringProvider"/>.</returns>
+        </member>
         <member name="T:ag.DbData.SQLite.SQLiteDbDataObject">
             <summary>
             Represents SQLiteDbDataObject object.
             </summary>
         </member>
-        <member name="M:ag.DbData.SQLite.SQLiteDbDataObject.#ctor(Microsoft.Extensions.Logging.ILogger{ag.DbData.Abstraction.IDbDataObject},Microsoft.Extensions.Options.IOptions{ag.DbData.Abstraction.DbDataSettings})">
-            <summary>.
+        <member name="M:ag.DbData.SQLite.SQLiteDbDataObject.#ctor(Microsoft.Extensions.Logging.ILogger{ag.DbData.Abstraction.IDbDataObject},Microsoft.Extensions.Options.IOptions{ag.DbData.Abstraction.DbDataSettings},ag.DbData.Abstraction.Services.IDbDataStringProviderFactory{ag.DbData.SQLite.Services.SQLiteStringProvider})">
+            <summary>
             Creates new instance of <see cref="T:ag.DbData.SQLite.SQLiteDbDataObject"/>.
             </summary>
             <param name="logger"><see cref="T:Microsoft.Extensions.Logging.ILogger"/> object.</param>
             <param name="options"><see cref="T:ag.DbData.Abstraction.DbDataSettings"/> options.</param>
+            <param name="stringProviderFactory"><see cref="T:ag.DbData.SQLite.Services.SQLiteStringProvider"/> object.</param>
         </member>
         <member name="M:ag.DbData.SQLite.SQLiteDbDataObject.FillDataSet(System.String)">
             <inheritdoc />

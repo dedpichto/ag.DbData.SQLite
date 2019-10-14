@@ -1,4 +1,9 @@
-﻿using System;
+﻿using ag.DbData.Abstraction;
+using ag.DbData.Abstraction.Services;
+using ag.DbData.SQLite.Services;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
@@ -6,9 +11,6 @@ using System.Data.SQLite;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using ag.DbData.Abstraction;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace ag.DbData.SQLite
 {
@@ -18,12 +20,15 @@ namespace ag.DbData.SQLite
     public class SQLiteDbDataObject : DbDataObject
     {
         #region ctor
-        /// <summary>.
+        /// <summary>
         /// Creates new instance of <see cref="SQLiteDbDataObject"/>.
         /// </summary>
         /// <param name="logger"><see cref="ILogger"/> object.</param>
         /// <param name="options"><see cref="DbDataSettings"/> options.</param>
-        public SQLiteDbDataObject(ILogger<IDbDataObject> logger, IOptions<DbDataSettings> options) : base(logger, options) { }
+        /// <param name="stringProviderFactory"><see cref="SQLiteStringProvider"/> object.</param>
+        public SQLiteDbDataObject(ILogger<IDbDataObject> logger, IOptions<DbDataSettings> options, IDbDataStringProviderFactory<SQLiteStringProvider> stringProviderFactory) :
+            base(logger, options, stringProviderFactory.Get())
+        { }
         #endregion
 
         #region Overrides
@@ -102,7 +107,7 @@ namespace ag.DbData.SQLite
             }
             catch (Exception ex)
             {
-                Logger?.LogError(ex, $"Error at BeginTransaction");
+                Logger?.LogError(ex, "Error at BeginTransaction");
                 throw new DbDataException(ex, "");
             }
         }
@@ -256,7 +261,7 @@ namespace ag.DbData.SQLite
                 return await Task.Run(async () =>
                 {
                     int rows;
-                    using (var asyncConnection = new SQLiteConnection(Connection.ConnectionString))
+                    using (var asyncConnection = new SQLiteConnection(StringProvider.ConnectionString))
                     {
                         using (var cmd = asyncConnection.CreateCommand())
                         {
@@ -291,7 +296,7 @@ namespace ag.DbData.SQLite
                 return await Task.Run(async () =>
                 {
                     object obj;
-                    using (var asyncConnection = new SQLiteConnection(Connection.ConnectionString))
+                    using (var asyncConnection = new SQLiteConnection(StringProvider.ConnectionString))
                     {
                         using (var cmd = asyncConnection.CreateCommand())
                         {
