@@ -1,10 +1,10 @@
 ﻿using ag.DbData.Abstraction;
 using ag.DbData.Abstraction.Services;
 using ag.DbData.SQLite.Factories;
-using ag.DbData.SQLite.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace ag.DbData.SQLite.Extensions
 {
@@ -20,8 +20,7 @@ namespace ag.DbData.SQLite.Extensions
         /// <returns><see cref="IServiceCollection"/>.</returns>
         public static IServiceCollection AddAgSQLite(this IServiceCollection services)
         {
-            services.AddSingleton<SQLiteStringProvider>();
-            services.AddSingleton<IDbDataStringProviderFactory<SQLiteStringProvider>, SQLiteStringProviderFactory>();
+            services.TryAddTransient<IDbDataStringProvider, DbDataStringProvider>();
             services.AddSingleton<ISQLiteDbDataFactory, SQLiteDbDataFactory>();
             services.AddTransient<SQLiteDbDataObject>();
             return services;
