@@ -8,8 +8,9 @@ TO YOUR OUTPUT LOCATION
 
 // add section to settings file (optional)
 {
-  "DbDataSettings": {
-    "AllowExceptionLogging": false // default is "true" 
+  "SQLiteDbDataSettings": {
+    "AllowExceptionLogging": false, // optional, default is "true"
+    "ConnectionString": "YOUR_CONNECTION_STRING" // optional 
   }
 }
 
@@ -26,11 +27,12 @@ using ag.DbData.SQLite.Core.Factories;
 		// ...
 		services.AddAgSQLite();
 		// or
-		services.AddAgSQLite(config.GetSection("DbDataSettings"));
+		services.AddAgSQLite(config.GetSection("SQLiteDbDataSettings"));
 		// or
 		services.AddAgSQLite(opts =>
         {
-            opts.AllowExceptionLogging = false; 
+            opts.AllowExceptionLogging = false; // optional
+			opts.ConnectionString = YOUR_CONNECTION_STRING; // optional  
         });
 
 ***************************************************************************************************
@@ -49,6 +51,20 @@ using ag.DbData.SQLite.Core.Factories;
 // SqLiteDbDataObject implements IDisposable interface, so use it into 'using' directive
 
         using (var sqLiteDbData = _sqLiteFactory.Create(YOUR_CONNECTION_STRING))
+        {
+            using (var t = sqLiteDbData.FillDataTable("SELECT * FROM YOUR_TABLE"))
+            {
+                foreach (DataRow r in t.Rows)
+                {
+                    Console.WriteLine(r[0]);
+                }
+            }
+        }
+
+// in case you have defined connection string in configuration setting you may call Create() method
+// without parameter
+
+        using (var sqLiteDbData = _sqLiteFactory.Create())
         {
             using (var t = sqLiteDbData.FillDataTable("SELECT * FROM YOUR_TABLE"))
             {

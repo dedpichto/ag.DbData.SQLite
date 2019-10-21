@@ -19,15 +19,21 @@ namespace ag.DbData.SQLite
     public class SQLiteDbDataObject : DbDataObject
     {
         #region ctor
+
         /// <summary>
         /// Creates new instance of <see cref="SQLiteDbDataObject"/>.
         /// </summary>
         /// <param name="logger"><see cref="ILogger"/> object.</param>
         /// <param name="options"><see cref="DbDataSettings"/> options.</param>
         /// <param name="stringProvider"><see cref="IDbDataStringProvider"/> object.</param>
-        public SQLiteDbDataObject(ILogger<IDbDataObject> logger, IOptions<DbDataSettings> options, IDbDataStringProvider stringProvider) :
+        public SQLiteDbDataObject(ILogger<IDbDataObject> logger, IOptions<SQLiteDbDataSettings> options,
+            IDbDataStringProvider stringProvider) :
             base(logger, options, stringProvider)
-        { }
+        {
+            var connectionString = StringProvider.ConnectionString;
+            if (!string.IsNullOrEmpty(connectionString))
+                Connection = new SQLiteConnection(connectionString);
+        }
         #endregion
 
         #region Overrides
@@ -153,13 +159,9 @@ namespace ag.DbData.SQLite
                     ? (SQLiteConnection)TransConnection
                     : (SQLiteConnection)Connection))
                 {
-                    if (timeout != -1)
-                    {
-                        if (timeout >= 0)
-                            cmd.CommandTimeout = timeout;
-                        else
-                            throw new ArgumentException("Invalid CommandTimeout value", nameof(timeout));
-                    }
+                    if (!IsValidTimeout(cmd, timeout))
+                        throw new ArgumentException("Invalid CommandTimeout value", nameof(timeout));
+
                     if (inTransaction)
                         cmd.Transaction = (SQLiteTransaction)Transaction;
                     using (var da = new SQLiteDataAdapter(cmd))
@@ -193,13 +195,9 @@ namespace ag.DbData.SQLite
                     ? (SQLiteConnection)TransConnection
                     : (SQLiteConnection)Connection))
                 {
-                    if (timeout != -1)
-                    {
-                        if (timeout >= 0)
-                            cmd.CommandTimeout = timeout;
-                        else
-                            throw new ArgumentException("Invalid CommandTimeout value", nameof(timeout));
-                    }
+                    if (!IsValidTimeout(cmd, timeout))
+                        throw new ArgumentException("Invalid CommandTimeout value", nameof(timeout));
+
                     if (inTransaction)
                         cmd.Transaction = (SQLiteTransaction)Transaction;
                     using (var da = new SQLiteDataAdapter(cmd))
@@ -220,13 +218,9 @@ namespace ag.DbData.SQLite
         {
             try
             {
-                if (timeout != -1)
-                {
-                    if (timeout >= 0)
-                        cmd.CommandTimeout = timeout;
-                    else
-                        throw new ArgumentException("Invalid CommandTimeout value", nameof(timeout));
-                }
+                if (!IsValidTimeout(cmd, timeout))
+                    throw new ArgumentException("Invalid CommandTimeout value", nameof(timeout));
+
                 if (inTransaction)
                 {
                     cmd.Connection = (SQLiteConnection)TransConnection;
@@ -265,13 +259,8 @@ namespace ag.DbData.SQLite
                         using (var cmd = asyncConnection.CreateCommand())
                         {
                             cmd.CommandText = query;
-                            if (timeout != -1)
-                            {
-                                if (timeout >= 0)
-                                    cmd.CommandTimeout = timeout;
-                                else
-                                    throw new ArgumentException("Invalid CommandTimeout value", nameof(timeout));
-                            }
+                            if (!IsValidTimeout(cmd, timeout))
+                                throw new ArgumentException("Invalid CommandTimeout value", nameof(timeout));
 
                             await asyncConnection.OpenAsync(cancellationToken);
 
@@ -300,13 +289,8 @@ namespace ag.DbData.SQLite
                         using (var cmd = asyncConnection.CreateCommand())
                         {
                             cmd.CommandText = query;
-                            if (timeout != -1)
-                            {
-                                if (timeout >= 0)
-                                    cmd.CommandTimeout = timeout;
-                                else
-                                    throw new ArgumentException("Invalid CommandTimeout value", nameof(timeout));
-                            }
+                            if (!IsValidTimeout(cmd, timeout))
+                                throw new ArgumentException("Invalid CommandTimeout value", nameof(timeout));
 
                             await asyncConnection.OpenAsync(cancellationToken);
 

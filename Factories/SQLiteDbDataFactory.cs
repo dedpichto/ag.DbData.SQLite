@@ -15,6 +15,16 @@ namespace ag.DbData.SQLite.Factories
         /// <summary>
         /// Creates object of type <see cref="SQLiteDbDataObject"/>.
         /// </summary>
+        /// <returns><see cref="SQLiteDbDataObject"/> implementation of <see cref="IDbDataObject"/> interface.</returns>
+        public IDbDataObject Create()
+        {
+            var dbObject = _serviceProvider.GetService<SQLiteDbDataObject>();
+            return dbObject;
+        }
+
+        /// <summary>
+        /// Creates object of type <see cref="SQLiteDbDataObject"/>.
+        /// </summary>
         /// <param name="connectionString">Database connection string.</param>
         /// <returns><see cref="SQLiteDbDataObject"/> implementation of <see cref="IDbDataObject"/> interface.</returns>
         public IDbDataObject Create(string connectionString)
@@ -23,8 +33,7 @@ namespace ag.DbData.SQLite.Factories
             dbObject.Connection = new SQLiteConnection(connectionString);
             return dbObject;
         }
-
-
+        
         /// <summary>
         /// Creates new SQLiteDbDataFactory object.
         /// </summary>

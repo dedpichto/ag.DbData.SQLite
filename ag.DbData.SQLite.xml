@@ -24,7 +24,7 @@
             <param name="configurationSection">The <see cref="T:Microsoft.Extensions.Configuration.IConfigurationSection"/> being bound.</param>
             <returns><see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.</returns>
         </member>
-        <member name="M:ag.DbData.SQLite.Extensions.Extensions.AddAgSQLite(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{ag.DbData.Abstraction.DbDataSettings})">
+        <member name="M:ag.DbData.SQLite.Extensions.Extensions.AddAgSQLite(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{ag.DbData.SQLite.SQLiteDbDataSettings})">
             <summary>
             Appends the registration of <see cref="T:ag.DbData.SQLite.Factories.SQLiteDbDataFactory"/> and <see cref="T:ag.DbData.SQLite.SQLiteDbDataObject"/> services to <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> and configures the options.
             </summary>
@@ -39,6 +39,12 @@
             <summary>
             Represents SqlDbDataFactory object.
             </summary>
+        </member>
+        <member name="M:ag.DbData.SQLite.Factories.SQLiteDbDataFactory.Create">
+            <summary>
+            Creates object of type <see cref="T:ag.DbData.SQLite.SQLiteDbDataObject"/>.
+            </summary>
+            <returns><see cref="T:ag.DbData.SQLite.SQLiteDbDataObject"/> implementation of <see cref="T:ag.DbData.Abstraction.IDbDataObject"/> interface.</returns>
         </member>
         <member name="M:ag.DbData.SQLite.Factories.SQLiteDbDataFactory.Create(System.String)">
             <summary>
@@ -58,7 +64,7 @@
             Represents SQLiteDbDataObject object.
             </summary>
         </member>
-        <member name="M:ag.DbData.SQLite.SQLiteDbDataObject.#ctor(Microsoft.Extensions.Logging.ILogger{ag.DbData.Abstraction.IDbDataObject},Microsoft.Extensions.Options.IOptions{ag.DbData.Abstraction.DbDataSettings},ag.DbData.Abstraction.Services.IDbDataStringProvider)">
+        <member name="M:ag.DbData.SQLite.SQLiteDbDataObject.#ctor(Microsoft.Extensions.Logging.ILogger{ag.DbData.Abstraction.IDbDataObject},Microsoft.Extensions.Options.IOptions{ag.DbData.SQLite.SQLiteDbDataSettings},ag.DbData.Abstraction.Services.IDbDataStringProvider)">
             <summary>
             Creates new instance of <see cref="T:ag.DbData.SQLite.SQLiteDbDataObject"/>.
             </summary>
@@ -140,6 +146,11 @@
         </member>
         <member name="M:ag.DbData.SQLite.SQLiteDbDataObject.GetScalarAsync(System.String,System.Int32,System.Threading.CancellationToken)">
             <inheritdoc />
+        </member>
+        <member name="T:ag.DbData.SQLite.SQLiteDbDataSettings">
+            <summary>
+            Represents SQLiteDbDataSettings object, inherited from <see cref="T:ag.DbData.Abstraction.DbDataSettings"/>.
+            </summary>
         </member>
     </members>
 </doc>

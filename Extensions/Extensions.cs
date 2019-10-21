@@ -1,10 +1,9 @@
-﻿using ag.DbData.Abstraction;
-using ag.DbData.Abstraction.Services;
+﻿using ag.DbData.Abstraction.Services;
 using ag.DbData.SQLite.Factories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using System;
 
 namespace ag.DbData.SQLite.Extensions
 {
@@ -35,7 +34,11 @@ namespace ag.DbData.SQLite.Extensions
         public static IServiceCollection AddAgSQLite(this IServiceCollection services, IConfigurationSection configurationSection)
         {
             services.AddAgSQLite();
-            services.Configure<DbDataSettings>(configurationSection);
+            services.Configure<SQLiteDbDataSettings>(opts =>
+            {
+                opts.AllowExceptionLogging = configurationSection.GetValue<bool>("AllowExceptionLogging");
+                opts.ConnectionString = configurationSection.GetValue<string>("ConnectionString");
+            });
             return services;
         }
 
@@ -46,7 +49,7 @@ namespace ag.DbData.SQLite.Extensions
         /// <param name="configureOptions">The action used to configure the options.</param>
         /// <returns><see cref="IServiceCollection"/>.</returns>
         public static IServiceCollection AddAgSQLite(this IServiceCollection services,
-            Action<DbDataSettings> configureOptions)
+            Action<SQLiteDbDataSettings> configureOptions)
         {
             services.AddAgSQLite();
             services.Configure(configureOptions);
