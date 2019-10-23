@@ -8,7 +8,7 @@ namespace ag.DbData.SQLite.Factories
     /// <summary>
     /// Represents SqlDbDataFactory object.
     /// </summary>
-    public class SQLiteDbDataFactory : ISQLiteDbDataFactory
+    internal class SQLiteDbDataFactory : ISQLiteDbDataFactory
     {
         private readonly IServiceProvider _serviceProvider;
 

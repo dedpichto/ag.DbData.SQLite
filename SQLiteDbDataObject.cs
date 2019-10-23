@@ -16,7 +16,7 @@ namespace ag.DbData.SQLite
     /// <summary>
     /// Represents SQLiteDbDataObject object.
     /// </summary>
-    public class SQLiteDbDataObject : DbDataObject
+    internal class SQLiteDbDataObject : DbDataObject
     {
         #region ctor
 
