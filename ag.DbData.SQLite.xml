@@ -123,6 +123,9 @@
         <member name="M:ag.DbData.SQLite.SQLiteDbDataObject.BeginTransaction(System.String)">
             <inheritdoc />
         </member>
+        <member name="M:ag.DbData.SQLite.SQLiteDbDataObject.BeginTransaction">
+            <inheritdoc />
+        </member>
         <member name="M:ag.DbData.SQLite.SQLiteDbDataObject.ExecuteAsync(System.String)">
             <inheritdoc />
         </member>
