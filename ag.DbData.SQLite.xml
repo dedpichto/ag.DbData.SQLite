@@ -108,6 +108,18 @@
         <member name="M:ag.DbData.SQLite.SQLiteDbDataObject.FillDataTableInTransaction(System.String,System.Int32)">
             <inheritdoc />
         </member>
+        <member name="M:ag.DbData.SQLite.SQLiteDbDataObject.FillDataTable(System.Data.Common.DbCommand)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.SQLite.SQLiteDbDataObject.FillDataTable(System.Data.Common.DbCommand,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.SQLite.SQLiteDbDataObject.FillDataTableInTransaction(System.Data.Common.DbCommand)">
+            <inheritdoc />
+        </member>
+        <member name="M:ag.DbData.SQLite.SQLiteDbDataObject.FillDataTableInTransaction(System.Data.Common.DbCommand,System.Int32)">
+            <inheritdoc />
+        </member>
         <member name="M:ag.DbData.SQLite.SQLiteDbDataObject.ExecuteCommand(System.Data.Common.DbCommand)">
             <inheritdoc />
         </member>
