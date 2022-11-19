@@ -33,7 +33,19 @@ namespace ag.DbData.SQLite.Factories
             dbObject.Connection = new SQLiteConnection(connectionString);
             return dbObject;
         }
-        
+
+        /// <summary>
+        /// Creates object of type <see cref="SQLiteDbDataObject"/>.
+        /// </summary>
+        /// <param name="defaultCommandTimeOut">Replaces default coommand timeout of provider</param>
+        /// <returns></returns>
+        public IDbDataObject Create(int defaultCommandTimeOut)
+        {
+            var dbObject = _serviceProvider.GetService<SQLiteDbDataObject>();
+            dbObject.DefaultCommandTimeout = defaultCommandTimeOut;
+            return dbObject;
+        }
+
         /// <summary>
         /// Creates new SQLiteDbDataFactory object.
         /// </summary>

@@ -188,6 +188,8 @@ namespace ag.DbData.SQLite
         {
             try
             {
+                if (timeout == -1 & DefaultCommandTimeout != null)
+                    timeout = DefaultCommandTimeout.Value;
                 var dataSet = new DataSet();
                 using (var cmd = new SQLiteCommand(query, inTransaction
                     ? (SQLiteConnection)TransConnection
@@ -224,6 +226,8 @@ namespace ag.DbData.SQLite
         {
             try
             {
+                if (timeout == -1 & DefaultCommandTimeout != null)
+                    timeout = DefaultCommandTimeout.Value;
                 var table = new DataTable();
                 using (var cmd = new SQLiteCommand(query, inTransaction
                     ? (SQLiteConnection)TransConnection
@@ -252,6 +256,8 @@ namespace ag.DbData.SQLite
         {
             try
             {
+                if (timeout == -1 & DefaultCommandTimeout != null)
+                    timeout = DefaultCommandTimeout.Value;
                 var table = new DataTable();
                 command.Connection = inTransaction
                     ? (SQLiteConnection)TransConnection
@@ -278,6 +284,8 @@ namespace ag.DbData.SQLite
         {
             try
             {
+                if (timeout == -1 & DefaultCommandTimeout != null)
+                    timeout = DefaultCommandTimeout.Value;
                 if (!IsValidTimeout(cmd, timeout))
                     throw new ArgumentException("Invalid CommandTimeout value", nameof(timeout));
 
@@ -311,6 +319,8 @@ namespace ag.DbData.SQLite
         {
             try
             {
+                if (timeout == -1 & DefaultCommandTimeout != null)
+                    timeout = DefaultCommandTimeout.Value;
                 return await Task.Run(async () =>
                 {
                     int rows;
@@ -341,6 +351,8 @@ namespace ag.DbData.SQLite
         {
             try
             {
+                if (timeout == -1 & DefaultCommandTimeout != null)
+                    timeout = DefaultCommandTimeout.Value;
                 return await Task.Run(async () =>
                 {
                     object obj;
@@ -371,6 +383,8 @@ namespace ag.DbData.SQLite
         {
             try
             {
+                if (timeout == -1 & DefaultCommandTimeout != null)
+                    timeout = DefaultCommandTimeout.Value;
                 return await Task.Run(async () =>
                 {
                     using (var asyncConnection = new SQLiteConnection(StringProvider.ConnectionString))
