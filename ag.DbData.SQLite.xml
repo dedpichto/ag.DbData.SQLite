@@ -181,6 +181,14 @@
         <member name="M:ag.DbData.SQLite.SQLiteDbDataObject.FillDataTableAsync(System.String,System.Int32,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:ag.DbData.SQLite.SQLiteDbDataObject.BulkInsert(System.String,System.Data.DataTable,System.Int32,System.Int32,ag.DbData.Abstraction.BulkInsertOptions)">
+            <inheritdoc />
+            <remarks>Uses single parameterized INSERT command executed for each row inside one transaction. <paramref name="batchSize"/> and <paramref name="options"/> are ignored.</remarks>
+        </member>
+        <member name="M:ag.DbData.SQLite.SQLiteDbDataObject.BulkInsertInTransaction(System.String,System.Data.DataTable,System.Int32,System.Int32,ag.DbData.Abstraction.BulkInsertOptions)">
+            <inheritdoc />
+            <remarks>Uses single parameterized INSERT command executed for each row inside one transaction. <paramref name="batchSize"/> and <paramref name="options"/> are ignored.</remarks>
+        </member>
         <member name="T:ag.DbData.SQLite.SQLiteDbDataSettings">
             <summary>
             Represents SQLiteDbDataSettings object, inherited from <see cref="T:ag.DbData.Abstraction.DbDataSettings"/>.

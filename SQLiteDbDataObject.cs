@@ -154,9 +154,27 @@ namespace ag.DbData.SQLite
         /// <inheritdoc />
         public override async Task<DataTable> FillDataTableAsync(string query, int timeout, CancellationToken cancellationToken) => await innerFillDataTableAsync(query, cancellationToken, timeout);
 
+        /// <inheritdoc />
+        /// <remarks>Uses single parameterized INSERT command executed for each row inside one transaction. <paramref name="batchSize"/> and <paramref name="options"/> are ignored.</remarks>
+        public override int BulkInsert(string destinationTable, DataTable data, int timeout = -1, int batchSize = 0,
+            BulkInsertOptions options = BulkInsertOptions.Default) =>
+            innerBulkInsert(destinationTable, data, timeout, batchSize, options, false);
+
+        /// <inheritdoc />
+        /// <remarks>Uses single parameterized INSERT command executed for each row inside one transaction. <paramref name="batchSize"/> and <paramref name="options"/> are ignored.</remarks>
+        public override int BulkInsertInTransaction(string destinationTable, DataTable data, int timeout = -1, int batchSize = 0,
+            BulkInsertOptions options = BulkInsertOptions.Default) =>
+            innerBulkInsert(destinationTable, data, timeout, batchSize, options, true);
+
         #endregion
 
         #region Private procedures
+        private int innerBulkInsert(string destinationTable, DataTable data, int timeout, int batchSize,
+            BulkInsertOptions options, bool inTransaction) =>
+            RunBulkInsert(destinationTable, data, timeout, inTransaction, true, (connection, transaction, resolvedTimeout) =>
+                BulkInsertByCommand(connection, transaction, destinationTable, data,
+                    name => "\"" + name.Replace("\"", "\"\"") + "\"", i => $"@p{i}", resolvedTimeout));
+
         private bool innerBeginTransaction(string connectionString)
         {
             try

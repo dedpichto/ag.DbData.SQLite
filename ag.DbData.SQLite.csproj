@@ -2,14 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>3.0.0.9</Version>
+    <Version>4.0.0</Version>
     <Authors>Andrey Gruber</Authors>
     <Description>Simplifies working with SQLite databases in .NET Framework, .NET Core and .NET Standard projects</Description>
     <PackageTags>Database, SQLite, ADO.NET, .NET, Core, Snandard, Framework</PackageTags>
     <RepositoryUrl>https://github.com/dedpichto/ag.DbData.SQLite</RepositoryUrl>
     <PackageProjectUrl>https://github.com/dedpichto/ag.DbData.SQLite</PackageProjectUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <PackageReleaseNotes>Updtes Nuget dependencies</PackageReleaseNotes>
+    <PackageReleaseNotes>Adds BulkInsert and BulkInsertInTransaction methods</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -31,7 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ag.DbData.Abstraction" Version="3.0.0.9" />
+    <PackageReference Include="ag.DbData.Abstraction" Version="4.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
     <PackageReference Include="System.Data.SQLite.Core" Version="1.0.118" />
